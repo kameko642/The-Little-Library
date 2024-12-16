@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - The Little Library</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .profile-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      background-color: #fffaf3;
+    }
+    .btn-custom {
+      background-color: #ff66b2;
+      color: white;
+      border-radius: 25px;
+      padding: 10px 25px;
+    }
+    .btn-custom:hover {
+      background-color: #ff99cc;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="demo 1.html">The Little Library</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="demo 1.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="demo 4.html">My Shelf</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="demo 5.html">My Profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Profile Section -->
+  <div class="profile-container">
+    <h2 class="text-center mb-4">My Profile</h2>
+    <form id="profile-form">
+      <!-- Full Name -->
+      <div class="mb-3">
+        <label for="name" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your full name">
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email">
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="mb-3">
+        <label for="dob" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" id="dob">
+      </div>
+
+      <!-- Preferred Book Genre -->
+      <div class="mb-3">
+        <label for="genre" class="form-label">Preferred Book Genre</label>
+        <input type="text" class="form-control" id="genre" placeholder="Enter your preferred book genre">
+      </div>
+
+      <!-- Favorite Book -->
+      <div class="mb-3">
+        <label for="favorite-book" class="form-label">Favorite Book</label>
+        <input type="text" class="form-control" id="favorite-book" placeholder="Enter your favorite book">
+      </div>
+
+      <!-- Password Field (Read-Only) -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password (Hidden for security)</label>
+        <input type="password" class="form-control" id="password" disabled>
+      </div>
+
+      <!-- Save Button -->
+      <button type="button" class="btn btn-custom w-100" id="save-profile">Save</button>
+    </form>
+  </div>
+
+  <script>
+    // Load profile data from localStorage (set during sign-up)
+    const loadProfile = () => {
+      const userData = JSON.parse(localStorage.getItem("userData")) || {};
+      document.getElementById("name").value = userData.fullName || "";
+      document.getElementById("email").value = userData.email || "";
+      document.getElementById("dob").value = userData.dob || "";
+      document.getElementById("genre").value = userData.genre || "";
+      document.getElementById("favorite-book").value = userData.favoriteBook || "";
+      document.getElementById("password").value = userData.password || ""; // Hidden, but available for testing
+    };
+
+    // Save updated profile data back to localStorage
+    const saveProfile = () => {
+      const updatedUserData = {
+        fullName: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        dob: document.getElementById("dob").value,
+        genre: document.getElementById("genre").value,
+        favoriteBook: document.getElementById("favorite-book").value,
+        password: document.getElementById("password").value, // Retain password (disabled field)
+      };
+      localStorage.setItem("userData", JSON.stringify(updatedUserData));
+      alert("Profile updated successfully!");
+    };
+
+    // Load profile data when the page loads
+    document.addEventListener("DOMContentLoaded", loadProfile);
+
+    // Save profile data when the save button is clicked
+    document.getElementById("save-profile").addEventListener("click", saveProfile);
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
